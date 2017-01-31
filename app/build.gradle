@@ -1,0 +1,108 @@
+apply plugin: 'com.android.application'
+//butterknife
+apply plugin: 'com.jakewharton.butterknife'
+//retrolambda
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.1"
+
+    defaultConfig {
+        applicationId "com.wezom.template"
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    dexOptions {
+        javaMaxHeapSize = "4g"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        production {
+            minSdkVersion 17
+            applicationId "com.wezom.template"
+        }
+
+        development {
+            minSdkVersion 17
+            applicationId "com.wezom.template"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+    }
+}
+
+def daggerVer = '2.8'
+def butterKnifeVer = "8.4.0"
+def supportVer = '23.4.0'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //SupportLib
+    compile "com.android.support:appcompat-v7:$supportVer"
+    compile "com.android.support:design:$supportVer"
+    compile "com.android.support:recyclerview-v7:$supportVer"
+    //RxJava
+    compile "io.reactivex.rxjava2:rxjava:2.0.1"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //Multidex
+    compile 'com.android.support:multidex:1.0.1'
+    //Moxy
+    compile 'com.arello-mobile:moxy:1.4.5'
+    compile 'com.arello-mobile:moxy-app-compat:1.4.5'
+    provided 'com.arello-mobile:moxy-compiler:1.4.5'
+    //Dagger2
+    compile "com.google.dagger:dagger:$daggerVer"
+    provided "org.glassfish:javax.annotation:10.0-b28"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVer"
+    //Lombok
+    compile "org.projectlombok:lombok:1.16.12"
+    //Bus
+    compile "org.greenrobot:eventbus:3.0.0"
+    //Retrofit
+    compile "com.squareup.retrofit2:retrofit:2.1.0"
+    compile "com.squareup.retrofit2:converter-gson:2.1.0"
+    compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0"
+    //OkHTTP
+    compile "com.squareup.okhttp3:okhttp:3.6.0"
+    //GSON
+    compile "com.google.code.gson:gson:2.8.0"
+    //ButterKnife
+    compile "com.jakewharton:butterknife:$butterKnifeVer"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVer"
+    //Fragmentargs
+    compile "com.hannesdorfmann.fragmentargs:annotation:3.0.2"
+    annotationProcessor "com.hannesdorfmann.fragmentargs:processor:3.0.2"
+    compile 'com.hannesdorfmann.fragmentargs:bundler-parceler:3.0.2'//ArgsBundler
+    //Cicerone
+    compile 'ru.terrakok.cicerone:cicerone:1.1'
+    //Timber
+    compile 'com.jakewharton.timber:timber:4.5.1'
+
+}
